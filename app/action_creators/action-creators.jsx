@@ -17,7 +17,6 @@ export const REMOVE_CAMPUS = 'REMOVE_CAMPUS';
 // synchronous action creators:
 //-----------------------------
 export const receiveStudents = function(students) {
-  console.log('~~~ receiveStudents action creator - students recd: ', students)
   return {
     type: RECEIVE_STUDENTS,
     students: students
@@ -32,7 +31,6 @@ export const receiveStudent = function(student) {
 }
 
 export const receiveCampuses = function(campuses) {
-  console.log('~~~ receiveCampuses action creator - campuses recd: ', campuses)
   return {
     type: RECEIVE_CAMPUSES,
     campuses: campuses
@@ -40,7 +38,6 @@ export const receiveCampuses = function(campuses) {
 }
 
 export const receiveCampus = function(campus) {
-  console.log('~~~ receiveCampus action creator - campus recd: ', campus)
   return {
     type: RECEIVE_CAMPUS,
     campus: campus
@@ -61,13 +58,14 @@ export const loadStudents = function() {
       const action = receiveStudents(students);
       dispatch(action);
     })
+    .catch(console.error.bind(console))
   }
 }
 
 // Retrieve 1 student
 export const loadStudent = function(id) {
   return function(dispatch) {
-    axios.get('/api/students' + id)
+    axios.get('/api/students/' + id)
     .then(function (res) {
       return res.data;
     })
@@ -75,6 +73,7 @@ export const loadStudent = function(id) {
       const action = receiveStudent(student);
       dispatch(action);
     })
+    .catch(console.error.bind(console))
   }
 }
 
@@ -89,19 +88,32 @@ export const loadCampuses = function() {
       const action = receiveCampuses(campuses);
       dispatch(action);
     })
+    .catch(console.error.bind(console))
   }
 }
 
-// Retrieve 1 campus
-export const loadCampus = function(id) {
-  return function(dispatch) {
-    axios.get('/api/campuses' + id)
-    .then(function (res) {
-      return res.data;
-    })
-    .then(function(campus) {
+//Retrieve 1 campus
+export const loadCampus = campusId => {
+  return dispatch => {
+    return axios.get(`/api/campuses/${campusId}`)
+    .then(res => res.data)
+    .then(campus => {
       const action = receiveCampus(campus);
       dispatch(action);
     })
+    .catch(console.error.bind(console))
   }
 }
+// export const loadCampus = function(campusId) {
+//   return function(dispatch) {
+//     axios.get('/api/campuses/' + campusId)
+//     .then(function (res) {
+//       return res.data;
+//     })
+//     .then(function(campus) {
+//       const action = receiveCampus(campus);
+//       dispatch(action);
+//     })
+//     .catch(console.error.bind(console))
+//   }
+// }

@@ -4,14 +4,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+
 import store from './store';
 import { loadStudents, loadStudent, loadCampuses, loadCampus } from './action_creators/action-creators';
 import AllCampusesContainer from './components/AllCampusesContainer';
 import AllStudentsContainer from './components/AllStudentsContainer';
-//import Dashboard from './components/Dashboard';
+import CampusContainer from './components/CampusContainer';
+import StudentContainer from './components/StudentContainer';
 
 const onCampusesEnter = function() {
   store.dispatch(loadCampuses());
+}
+
+const onCampusEnter = function(nextRouterState) {
+  
+  const campusId = nextRouterState.params.id;
+  //console.log('~------------------------------ campusId: ', campusId)
+  store.dispatch(loadCampus(campusId));
 }
 
 const onStudentsEnter = function() {
@@ -19,7 +28,8 @@ const onStudentsEnter = function() {
 }
 
 const onStudentEnter = function(nextRouterState) {
-  store.dispatch(loadStudent(nextRouterState))
+  const studentId = nextRouterState.params.id;
+  store.dispatch(loadStudent(studentId));
 }
 
 ReactDOM.render(
@@ -36,4 +46,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('main')
 );
-

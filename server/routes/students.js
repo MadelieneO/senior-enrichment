@@ -2,7 +2,6 @@
 
 const api = require('express').Router()
 const Student = require('../../db/models/student')
-//const Campus = require('../../db/models/campus')
 
 // Get all students: '/api/students'
 api.get('/', function(req, res, next) {
@@ -36,7 +35,6 @@ api.post('/', function(req, res, next) {
 
 // Delete a student
 api.delete('/', function(req, res, next) {
-	console.log('~~~ in .delete - req.params.id: ', req.params.id)
 	const id = +req.params.id;
 	Student.findById(id)
 	.then(studentFound => {

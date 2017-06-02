@@ -18,7 +18,9 @@ export default class AllCampuses extends React.Component {
     return (
       <div>
         <h1>Margaret Hamilton Interplanetary Academy of JavaScript</h1>
+        <h4>Campus List</h4>
         <ul>{campusList}</ul>
+        <button type="button" className="btn btn-primary btn-lg btn-block">Add New Campus</button>
       </div>
     );
   }

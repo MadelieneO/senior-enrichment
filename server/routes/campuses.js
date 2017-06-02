@@ -13,6 +13,7 @@ api.get('/', function(req, res, next) {
 
 // Get specific campus
 api.get('/:id', function(req, res, next) {
+	console.log('WHOOOOOOOOOOOO -------------------->>>>> api.get campuses, id: ', req.params.id)
 	Campus.findById(+req.params.id)
 	.then(campusFound => {
 		if (!campusFound) {
@@ -36,7 +37,6 @@ api.post('/', function(req, res, next) {
 
 // Delete a campus
 api.delete('/', function(req, res, next) {
-	console.log('~~~ in .delete - req.params.id: ', req.params.id)
 	const id = +req.params.id;
 	Campus.findById(id)
 	.then(campusFound => {
