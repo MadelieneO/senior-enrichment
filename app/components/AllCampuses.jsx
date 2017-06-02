@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { Link } from 'react-router';
 
 export default class AllCampuses extends React.Component {
   constructor(props) {
@@ -9,7 +10,9 @@ export default class AllCampuses extends React.Component {
 
   render() {
     const campusList = this.props.campuses && this.props.campuses.map(campus => (
-      <li key={campus.id}>{campus.name}</li>
+      <li key={campus.id}>
+        <Link to={'/campuses/' + campus.id}>{campus.name}</Link>
+      </li>
     ));
 
     return (
