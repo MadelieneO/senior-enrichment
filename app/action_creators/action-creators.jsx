@@ -3,6 +3,7 @@
 import axios from 'axios';
 
 // action types:
+//--------------
 export const RECEIVE_STUDENTS = 'RECEIVE_STUDENTS';
 export const RECEIVE_STUDENT = 'RECEIVE_STUDENT';
 export const ADD_STUDENT = 'ADD_STUDENT';
@@ -33,8 +34,16 @@ export const receiveStudent = function(student) {
 export const receiveCampuses = function(campuses) {
   console.log('~~~ receiveCampuses action creator - campuses recd: ', campuses)
   return {
-    type: RECEIVE_STUDENTS,
-    students: campuses
+    type: RECEIVE_CAMPUSES,
+    campuses: campuses
+  }
+}
+
+export const receiveCampus = function(campus) {
+  console.log('~~~ receiveCampus action creator - campus recd: ', campus)
+  return {
+    type: RECEIVE_CAMPUS,
+    campus: campus
   }
 }
 
@@ -64,6 +73,34 @@ export const loadStudent = function(id) {
     })
     .then(function(student) {
       const action = receiveStudent(student);
+      dispatch(action);
+    })
+  }
+}
+
+// Retrieve all campuses
+export const loadCampuses = function() {
+  return function(dispatch) {
+    axios.get('/api/campuses')
+    .then(function (res) {
+      return res.data;
+    })
+    .then(function(campuses) {
+      const action = receiveCampuses(campuses);
+      dispatch(action);
+    })
+  }
+}
+
+// Retrieve 1 campus
+export const loadCampus = function(id) {
+  return function(dispatch) {
+    axios.get('/api/campuses' + id)
+    .then(function (res) {
+      return res.data;
+    })
+    .then(function(campus) {
+      const action = receiveCampus(campus);
       dispatch(action);
     })
   }

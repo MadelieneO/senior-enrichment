@@ -1,10 +1,13 @@
 'use strict';
 
 import { combineReducers } from 'redux'
-import { RECEIVE_STUDENTS, RECEIVE_STUDENT } from '../action-creators';
+import { RECEIVE_STUDENTS, RECEIVE_STUDENT, RECEIVE_CAMPUSES, RECEIVE_CAMPUS } from '../action_creators/action-creators';
 
 const initialState = {
- students: []
+ students: [],
+ student: {},
+ campuses: [],
+ campus: {}
 }
 
 const rootReducer = function(state = initialState, action) {
@@ -13,11 +16,12 @@ const rootReducer = function(state = initialState, action) {
       return Object.assign({}, state, { students: action.students })
     case RECEIVE_STUDENT:
       return Object.assign({}, state, { student: action.student })
+    case RECEIVE_CAMPUSES:
+      return Object.assign({}, state, { campuses: action.campuses })
+    case RECEIVE_CAMPUS:
+      return Object.assign({}, state, { campus: action.campus })
     default: return state
   }
 };
 
 export default rootReducer
-
-  // console.log('~~~~~~ reducer - incoming state: ', state)
-  // console.log('~~~~~~ reducer - incoming action: ', action)

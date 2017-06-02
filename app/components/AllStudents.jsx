@@ -11,6 +11,7 @@ export default class AllStudents extends React.Component {
     const studentList = this.props.students && this.props.students.map(student => (
       <li key={student.id}>{student.name}</li>
     ));
+    
     return (
       <div>
         <h1>Margaret Hamilton Interplanetary Academy of JavaScript</h1>

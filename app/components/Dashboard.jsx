@@ -1,13 +1,16 @@
 'use strict';
 
 import { connect } from 'react-redux';
-import AllStudents from './AllStudents';
+import AllStudentsContainer from './AllStudentsContainer';
+import AllCampusesContainer from './AllCampusesContainer';
 
 const mapStateToProps = state => ({
-  students: state.students
+  students: state.students,
+  campuses: state.campuses
 })
 
 //export default connect(mapStateToProps)(AllStudents);
+//export default connect(mapStateToProps)(AllCampuses);
 const componentCreator = connect(mapStateToProps);
-const Dashboard = componentCreator(AllStudents);
+const Dashboard = componentCreator(AllCampuses);
 export default Dashboard;
